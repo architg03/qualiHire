@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from "../Components/Footer";
+import Footer from "./Footer";
 import Stack from "react-bootstrap/esm/Stack";
 import Container from "react-bootstrap/esm/Container";
 import Home from "../Pages/home";
