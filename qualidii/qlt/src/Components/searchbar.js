@@ -8,32 +8,32 @@ import Badge from "react-bootstrap/Badge";
 
 const SearchBar = ({ inputText, setInputText, profile, setProfile, profiles }) => {
 
-    let listProfiles = profiles.profiles.map((p) => 
-        <Dropdown.Item key={p.UUID} onClick={setProfile(p)}>
+
+    const listProfiles = profiles.profiles.map((p) =>
+        <Dropdown.Item key={p.UUID} onClick={() => setProfile(p)}>
             {p.title}
             {" "}
             <Badge>{p.type}</Badge>
         </Dropdown.Item>
-    )
+    );
 
     let onSearchSubmit = () => {
         //search logic would go here
         var Tokens = inputText.toLowerCase().split(" ");
         var JsonTokens = JSON.stringify(Tokens);
         console.log(JsonTokens);
-    }
+    };
 
     let inputHandler = (e) => {
         var lowerCase = e.target.value.toLowerCase();
         setInputText(lowerCase);
-    }
+    };
 
     return (
         <InputGroup size="sm" className="mb-3">
-
-            <Dropdown variant="secondary">
-                <Dropdown.Toggle>
-                    {profile ? profile.title : "Profile"}
+            <Dropdown>
+                <Dropdown.Toggle variant="secondary">
+                    {profile != null ? profile.title : "Select Profile"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {listProfiles}

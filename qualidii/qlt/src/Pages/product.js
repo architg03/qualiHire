@@ -58,7 +58,7 @@ const Product = (props) => {
                 fixed="top">
                 <Container>
                     <Stack>
-                        <p>1TDM Product Search</p>
+                        <p>QualiDII Product Search</p>
                         <SearchBar
                             inputText={inputText}
                             setInputText={setInputText}
