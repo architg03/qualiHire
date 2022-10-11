@@ -48,8 +48,6 @@ const DataCardButton = (props) => {
         setButton(button.text === "Available" ? dataButtonConfig["owned"] : dataButtonConfig["available"]);
     };
 
-    console.log(props.ownerName);
-
     return (
         <>
             <style type='text/css'>

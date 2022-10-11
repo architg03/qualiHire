@@ -4,7 +4,6 @@ import NavBar from 'react-bootstrap/Navbar';
 import Stack from 'react-bootstrap/Stack';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
 import DataCard from "../Components/datacard";
 import SearchBar from "../Components/searchbar";
 import "../Components/dummyResponse.json";
@@ -12,10 +11,31 @@ import "../Components/dummyResponse.json";
 
 const Product = (props) => {
 
+    const profileEx = {
+        profiles: [
+            {
+                UUID: 0,
+                type: "Retail",
+                returns: "A product with name and department",
+                title: "Big Mart test data",
+                desc: "Big Mart test items for online storefront."
+            },
+            {
+                UUID: 1,
+                type: "Bank",
+                returns: "An account number, name, and balence",
+                title: "Big Bank Maxing",
+                desc: "Big bank test accounts for their new mobile application."
+            }
+        ]
+    };
+
     //dummy response and state management
     let response = require('../Components/dummyResponse.json');
     const [searchResult, setSearchResult] = useState(response);
     const [inputText, setInputText] = useState("");
+    const [profile, setProfile] = useState(null);
+    const [profiles, setProfiles] = useState(profileEx);
 
     //mapping response from json to data cards
     const listDataCards = searchResult.response.map((result) =>
@@ -39,12 +59,13 @@ const Product = (props) => {
                 <Container>
                     <Stack>
                         <p>1TDM Product Search</p>
-                        <InputGroup size="sm" className="mb-3">
-                            <SearchBar
-                                inputText={inputText}
-                                setInputText={setInputText}
-                            />
-                        </InputGroup>
+                        <SearchBar
+                            inputText={inputText}
+                            setInputText={setInputText}
+                            profile={profile}
+                            setProfile={setProfile}
+                            profiles = {profiles}
+                        />
                     </Stack>
                 </Container>
             </NavBar>
