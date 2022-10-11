@@ -24,19 +24,19 @@ public class UserController {
     private ProductRepository PRepository;
 
     @GetMapping("")
-    public List<User> findByFNameOrLName(String FName, String LName){
-        boolean FNameNotNull = FName != null;
-        boolean LNameNotNull = LName != null;
+    public List<User> findByFNameOrLName(@RequestBody User user){
+        boolean FNameNotNull = user.getFName() != null;
+        boolean LNameNotNull = user.getLName() != null;
         QueryBuilder builder = new QueryBuilder().select.add("u").from.add("User u");
         //If there is anything in the FName, then we add it to the search query.
-        if(FNameNotNull && !FName.isEmpty()) {
+        if(FNameNotNull && !user.getFName().isEmpty()) {
             builder.where.add("u.FName = :Fname");
-            builder.setParameter("Fname", FName);
+            builder.setParameter("Fname", user.getFName());
         }
         //If there is anything in LName, then we add it to the search query.
-        if(LNameNotNull && !LName.isEmpty()){
+        if(LNameNotNull && !user.getLName().isEmpty()){
             builder.where.add("u.LName = :Lname");
-            builder.setParameter("Lname",LName);
+            builder.setParameter("Lname",user.getLName());
         }
         return builder.createQuery(em,User.class).getResultList();
     }

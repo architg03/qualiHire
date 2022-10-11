@@ -19,6 +19,9 @@ public class Product {
     @ManyToOne
     private User user;
 
+    @OneToOne
+    private Profile profile;
+
     public Product(){
     }
     public Product(String token, String name){
