@@ -9,54 +9,54 @@ import Badge from "react-bootstrap/Badge";
 const SearchBar = ({ inputText, setInputText, profile, setProfile, profiles }) => {
 
 
-    const listProfiles = profiles.profiles.map((p) =>
+const listProfiles = profiles.profiles.map((p) =>
         <Dropdown.Item key={p.UUID} onClick={() => setProfile(p)}>
             {p.title}
             {" "}
             <Badge>{p.type}</Badge>
-        </Dropdown.Item>
+        </Dropdown.Item>    
     );
 
-    let onSearchSubmit = () => {
-        //search logic would go here
-        var Tokens = inputText.toLowerCase().split(" ");
-        var JsonTokens = JSON.stringify(Tokens);
-        console.log(JsonTokens);
-    };
+let onSearchSubmit = () => {
+    //search logic would go here
+    var Tokens = inputText.toLowerCase().split(" ");
+    var JsonTokens = JSON.stringify(Tokens);
+    console.log(JsonTokens);
+};
 
-    let inputHandler = (e) => {
-        var lowerCase = e.target.value.toLowerCase();
-        setInputText(lowerCase);
-    };
+let inputHandler = (e) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+};
 
-    return (
-        <InputGroup size="sm" className="mb-3">
-            <Dropdown>
-                <Dropdown.Toggle variant="secondary">
-                    {profile != null ? profile.title : "Select Profile"}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    {listProfiles}
-                </Dropdown.Menu>
-            </Dropdown>
-            <Form.Control
-                onChange={inputHandler}
-                placeholder="Enter search term"
-                aria-label="productSearch"
-                aria-describedby="basic-addon1"
-            />
+return (
+    <InputGroup size="sm" className="mb-3">
+        <Dropdown>
+            <Dropdown.Toggle variant="secondary">
+                {profile != null ? profile.title : "Select Profile"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+                {listProfiles}
+            </Dropdown.Menu>
+        </Dropdown>
+        <Form.Control
+            onChange={inputHandler}
+            placeholder="Enter search term"
+            aria-label="productSearch"
+            aria-describedby="basic-addon1"
+        />
 
-            <Button
-                onClick={onSearchSubmit}
-                variant="secondary"
-                id="button-addon1"
-                title="Search"
-            >
-                Search
-            </Button>
+        <Button
+            onClick={onSearchSubmit}
+            variant="secondary"
+            id="button-addon1"
+            title="Search"
+        >
+            Search
+        </Button>
 
-        </InputGroup>
-    );
+    </InputGroup>
+);
 };
 
 export default SearchBar; 
