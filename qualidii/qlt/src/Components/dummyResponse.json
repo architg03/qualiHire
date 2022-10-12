@@ -1,0 +1,53 @@
+{
+    "response": [
+        {
+            "id": 0,
+            "token": "Electronics",
+            "name": "Mark 4 Drone",
+            "userID": 0,
+            "user": "John Doe"
+        },
+        {
+            "id": 1,
+            "token": "Toys and Games",
+            "name": "Frisbee",
+            "userID": 1,
+            "user": "Jane Doe"
+        },
+        {
+            "id": 2,
+            "token": "Home and Garden",
+            "name": "Garfield mug",
+            "userID": null,
+            "user": null
+        },
+        {
+            "id": 3,
+            "token": "Clothing and Apparel",
+            "name": "Nike Sweater",
+            "userID": null,
+            "user":null
+        },
+        {
+            "id": 4,
+            "token": "Grocery",
+            "name": "Protein Powder",
+            "userID": null,
+            "user":null
+        },
+        {
+            "id": 5,
+            "token": "Home and Garden",
+            "name": "Basic Dinnerware set",
+            "userID": 0,
+            "user":"John Doe"
+        },
+        {
+            "id": 6,
+            "token": "Toys and Games",
+            "name": "Minecraft: Xbox edition",
+            "userID": null,
+            "user":null
+        }
+    ]
+}
