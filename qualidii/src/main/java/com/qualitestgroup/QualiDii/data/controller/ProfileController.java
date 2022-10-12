@@ -55,7 +55,9 @@ public class ProfileController {
         product = builder.createQuery(em,Product.class).getSingleResult();
 
         profile.addData(product);
+        product.setProfile(profile);
         em.persist(profile);
+        em.persist(product);
     }
 
     @PutMapping("/create")
@@ -66,8 +68,13 @@ public class ProfileController {
     }
 
     @PostMapping("/remove/{id}")
+    @Transactional
+    @Modifying
     public void removeData(@PathVariable long id, @RequestBody Product product){
-        Profile profile = repository.getReferenceById(id);
+        QueryBuilder builder = new QueryBuilder().select.add("t").from.add("Profile t");
+        builder.where.add("t.UUID = :uuid");
+        builder.setParameter("uuid",id);
+        Profile profile = builder.createQuery(em,Profile.class).getSingleResult();
         Product product1 = PRepository.getReferenceById(product.getId());
         profile.deleteData(product1);
         em.persist(profile);

@@ -1,6 +1,7 @@
 package com.qualitestgroup.QualiDii.data.controller;
 
 import com.qualitestgroup.QualiDii.data.beans.Product;
+import com.qualitestgroup.QualiDii.data.beans.Profile;
 import com.qualitestgroup.QualiDii.data.beans.User;
 import com.qualitestgroup.QualiDii.data.repository.ProductRepository;
 import com.tri.persistence.jpql.QueryBuilder;
@@ -61,6 +62,26 @@ public class ProductController {
             em.persist(user);
         }
     }
+    @Transactional
+    @Modifying
+    @PostMapping("/unlockProfile")
+    public void deleteProfile(@RequestBody Product ProductID){
+        QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
+        builder.where.add("p.id = :id");
+        builder.setParameter("id",ProductID.getId());
+        Product product = builder.createQuery(em,Product.class).getSingleResult();
+        if(product.getProfileID() == null){
+            throw new RuntimeException("No Profile found for this product.");
+        }
+        else{
+            Profile profile = em.find(Profile.class,product.getProfileID());
+            product.deleteProfile();
+            profile.deleteData(product);
+            em.persist(product);
+            em.persist(profile);
+        }
+    }
+
     @PutMapping("/addData")
     @Transactional
     public void addProduct(@RequestBody Product product){

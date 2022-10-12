@@ -19,7 +19,7 @@ public class Product {
     @ManyToOne
     private User user;
 
-    @OneToOne
+    @ManyToOne
     private Profile profile;
 
     public Product(){
@@ -56,4 +56,13 @@ public class Product {
 
     public void deleteUser(){user = null;}
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+    public Long getProfileID(){
+        return profile != null ? profile.getUUID() : null;
+    }
+    public void deleteProfile(){
+        this.profile = null;
+    }
 }
