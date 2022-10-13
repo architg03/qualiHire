@@ -23,7 +23,7 @@ public class ProfileController {
     ProfileRepository repository;
     @Autowired
     private ProductRepository PRepository;
-    @GetMapping("/list")
+    @GetMapping("/search")
     public List<Profile> findByJSON(@RequestBody Profile Profile){
         boolean titleNotNull = Profile.getTitle() != null;
         boolean descNotNull = Profile.getDescription() != null;
@@ -79,4 +79,5 @@ public class ProfileController {
         profile.deleteData(product1);
         em.persist(profile);
     }
+
 }
