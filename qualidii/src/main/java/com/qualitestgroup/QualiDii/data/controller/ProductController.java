@@ -1,8 +1,11 @@
 package com.qualitestgroup.QualiDii.data.controller;
 
 import com.qualitestgroup.QualiDii.data.beans.Product;
+import com.qualitestgroup.QualiDii.data.beans.Profile;
+import com.qualitestgroup.QualiDii.data.beans.Request;
 import com.qualitestgroup.QualiDii.data.beans.User;
 import com.qualitestgroup.QualiDii.data.repository.ProductRepository;
+import com.qualitestgroup.QualiDii.data.repository.RequestRepository;
 import com.tri.persistence.jpql.QueryBuilder;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +24,10 @@ public class ProductController {
     private EntityManager em;
     @Autowired
     private ProductRepository repository;
+    @Autowired
+    private RequestRepository RRepo;
 
-
-    @GetMapping("/list")
+    @GetMapping("/search")
     public List<Product> findByJSON(@RequestBody Product product){
         boolean nameNotNull = product.getName() != null;
         boolean tokenNotNull = product.getType() != null;
@@ -51,6 +55,10 @@ public class ProductController {
         builder.setParameter("id",ProductID.getId());
         Product product = builder.createQuery(em,Product.class).getSingleResult();
         if(product.getUser() == null){
+            Request req = new Request("Product with id" + product.getId() + " could not be unlocked because there was no" +
+                    " user found for it.");
+            em.persist(req);
+            RRepo.saveAndFlush(req);
             throw new RuntimeException("No user found for this product.");
         }
         else{
@@ -61,6 +69,26 @@ public class ProductController {
             em.persist(user);
         }
     }
+    @Transactional
+    @Modifying
+    @PostMapping("/unlockProfile")
+    public void deleteProfile(@RequestBody Product ProductID){
+        QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
+        builder.where.add("p.id = :id");
+        builder.setParameter("id",ProductID.getId());
+        Product product = builder.createQuery(em,Product.class).getSingleResult();
+        if(product.getProfileID() == null){
+            throw new RuntimeException("No Profile found for this product.");
+        }
+        else{
+            Profile profile = em.find(Profile.class,product.getProfileID());
+            product.deleteProfile();
+            profile.deleteData(product);
+            em.persist(product);
+            em.persist(profile);
+        }
+    }
+
     @PutMapping("/addData")
     @Transactional
     public void addProduct(@RequestBody Product product){

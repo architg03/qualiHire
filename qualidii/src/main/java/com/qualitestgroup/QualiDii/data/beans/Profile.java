@@ -1,5 +1,7 @@
 package com.qualitestgroup.QualiDii.data.beans;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,12 @@ public class Profile {
     private String description;
     @OneToOne
     private Product exampleData;
+    @JoinTable(name="Profile_Product",
+            joinColumns = @JoinColumn(
+                    name="UUID",referencedColumnName = "UUID"),
+            inverseJoinColumns = @JoinColumn(name="ProductID",
+                    referencedColumnName = "ID")
+    )
     @OneToMany
     private List<Product> Data;
 
