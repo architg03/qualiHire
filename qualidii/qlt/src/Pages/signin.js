@@ -19,7 +19,7 @@ const signIn = (props) => {
                         maxWidth: "600px"
                     }}>
                         <Card.Body style={{ padding: "50px" }}>
-                            <Card.Title style={{ color: "white" }}> 1TDM Log In</Card.Title>
+                            <Card.Title style={{ color: "white" }}> QualiDII Log In</Card.Title>
                             <FloatingLabel
                                 controlId='floatingInput'
                                 label="Username"
