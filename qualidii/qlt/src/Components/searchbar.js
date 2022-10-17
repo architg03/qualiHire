@@ -18,7 +18,6 @@ const listProfiles = profiles.profiles.map((p) =>
     );
 
 let onSearchSubmit = () => {
-    //search logic would go here
     var Tokens = inputText.toLowerCase().split(" ");
     var JsonTokens = JSON.stringify(Tokens);
     console.log(JsonTokens);
