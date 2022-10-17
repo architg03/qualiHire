@@ -8,15 +8,18 @@ import Badge from "react-bootstrap/Badge";
 
 const SearchBar = ({ inputText, setInputText, profile, setProfile, profiles }) => {
 
-
-const listProfiles = profiles.profiles.map((p) =>
-        <Dropdown.Item key={p.UUID} onClick={() => setProfile(p)}>
-            {p.title}
-            {" "}
-            <Badge>{p.type}</Badge>
-        </Dropdown.Item>    
-    );
-
+let listProfiles;
+try {
+    listProfiles = profiles.profiles.map((p) =>
+            <Dropdown.Item key={p.UUID} onClick={() => setProfile(p)}>
+                {p.title}
+                {" "}
+                <Badge>{p.type}</Badge>
+            </Dropdown.Item>    
+        );
+} catch(e) {
+    console.log(e);
+}
 let onSearchSubmit = () => {
     var Tokens = inputText.toLowerCase().split(" ");
     var JsonTokens = JSON.stringify(Tokens);
