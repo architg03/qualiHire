@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import Stack from "react-bootstrap/esm/Stack";
 import Container from "react-bootstrap/esm/Container";
@@ -32,7 +32,7 @@ const NavbarController = () => {
   const [user, setUser] = useState(userLoggedIn);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Stack gap={3}>
         <Navbar />
         <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
@@ -49,7 +49,7 @@ const NavbarController = () => {
         </Container>
         <Footer />
       </Stack>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
