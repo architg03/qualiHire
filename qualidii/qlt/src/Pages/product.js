@@ -55,7 +55,7 @@ const Product = (props) => {
 
     //profiles fetched on page load,TODO: need to add handler to search within profile
     const [profile, setProfile] = useState(null);
-    const [profiles, setProfiles] = useState(null);
+    const [profiles, setProfiles] = useState([]);
 
     //API call to fetch all products on page load
 
