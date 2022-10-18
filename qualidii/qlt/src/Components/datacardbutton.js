@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 const dataButtonConfig = {
@@ -29,6 +30,7 @@ const dataButtonConfig = {
 
 const DataCardButton = (props) => {
 
+    const [isLoading, setLoading] = useState(false);
     const [button, setButton] = useState(buttonConfigManager());
 
     function buttonConfigManager() {
@@ -45,6 +47,8 @@ const DataCardButton = (props) => {
 
     //call setButton in here
     function buttonOnClickHandler() {
+        setLoading(true);
+        axios.put()
         setButton(button.text === "Available" ? dataButtonConfig["owned"] : dataButtonConfig["available"]);
     };
 

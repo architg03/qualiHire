@@ -20,6 +20,7 @@ try {
 } catch(e) {
     console.log(e);
 }
+
 let onSearchSubmit = () => {
     var Tokens = inputText.toLowerCase().split(" ");
     var JsonTokens = JSON.stringify(Tokens);
