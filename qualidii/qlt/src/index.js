@@ -6,9 +6,9 @@ import NavbarController from './Components/NavbarController';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const App = () => {
-  
-  return(
-    <NavbarController/>
+
+  return (
+    <NavbarController />
   );
 };
 

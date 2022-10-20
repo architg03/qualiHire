@@ -1,31 +1,117 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import NavBar from 'react-bootstrap/Navbar';
 import Stack from 'react-bootstrap/Stack';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
+import Spinner from "react-bootstrap/Spinner";
 import DataCard from "../Components/datacard";
 import SearchBar from "../Components/searchbar";
+import "../API/axiosconfig";
 import "../Components/dummyResponse.json";
+import axios from "axios";
 
 
 const Product = (props) => {
 
-    //dummy response and state management
-    let response = require('../Components/dummyResponse.json');
-    const [searchResult, setSearchResult] = useState(response);
+    const profileEx = {
+        profiles: [
+            {
+                UUID: 0,
+                type: "Retail",
+                returns: "A product with name and department",
+                title: "Big Mart test data",
+                desc: "Big Mart test items for online storefront."
+            },
+            {
+                UUID: 1,
+                type: "Bank",
+                returns: "An account number, name, and balence",
+                title: "Big Bank Maxing",
+                desc: "Big bank test accounts for their new mobile application."
+            }
+        ]
+    };
+
+    //result state management
+    const [searchResult, setSearchResult] = useState([]);
+    const [resultLoading, setResultLoading] = useState(true);
+    useEffect(() => {
+        const getData = async () => {
+            const result = await axios.get("product/list", {
+                "": {
+                    title: "",
+                }
+            })
+            setSearchResult(result);
+            setResultLoading(false);
+        }
+        getData();
+
+    }, [])
+
+    //state held here, managed in searchbar
     const [inputText, setInputText] = useState("");
 
-    //mapping response from json to data cards
-    const listDataCards = searchResult.response.map((result) =>
-        <div key={result.id}>
-            <DataCard
-                {...result}
-                userLoggedIn={props.user}
-            />
+    //profiles fetched on page load,TODO: need to add handler to search within profile
+    const [profile, setProfile] = useState(null);
+    const [profiles, setProfiles] = useState([]);
+
+    //API call to fetch all products on page load
+
+    //some JSX to make the loading spinner look better
+    const loadingPage = (
+        <div style={{padding: "100px", marginLeft: "20px"}}>
+            <Spinner style={{marginLeft: "40px"}} animation="border" variant="secondary"/>
+            <p className="text-muted">Fetching results...</p>
         </div>
     );
+
+
+    //request all profiles on page load
+    axios.get("profile/list").then((response) => {
+        setProfiles(response);
+    });
+
+    //maps search data to data within profile
+    const profileDataHandler = () => {
+        //if user has a profile selected
+        if(profile){
+            //force render objects
+            setSearchResult(profile.data);
+        }
+    }
+
+    //
+    // try/catch for filtered results when searching within a profile or all data
+    // TODO: return unfiltered after filtered results
+    //
+    let filterData;
+    let listDataCards;
+    try {
+        profileDataHandler();
+        filterData = searchResult.response.filter((el) => {
+            if (inputText === '') {
+                return el;
+            }
+            else {
+                return el.name.toLowerCase().includes(inputText);
+            }
+        });
+
+        //mapping response from json to data cards
+        listDataCards = filterData.map((result) =>
+            <div key={result.id}>
+                <DataCard
+                    {...result}
+                    userLoggedIn={props.user}
+                />
+            </div>
+        );
+    }
+    catch (e) {
+        console.error(e);
+    }
 
     return (
         <>
@@ -38,13 +124,14 @@ const Product = (props) => {
                 fixed="top">
                 <Container>
                     <Stack>
-                        <p>1TDM Product Search</p>
-                        <InputGroup size="sm" className="mb-3">
-                            <SearchBar
-                                inputText={inputText}
-                                setInputText={setInputText}
-                            />
-                        </InputGroup>
+                        <p>QualiDII Data Search</p>
+                        <SearchBar
+                            inputText={inputText}
+                            setInputText={setInputText}
+                            profile={profile}
+                            setProfile={setProfile}
+                            profiles={profiles}
+                        />
                     </Stack>
                 </Container>
             </NavBar>
@@ -53,7 +140,7 @@ const Product = (props) => {
                     <Col></Col>
                     <Col>
                         <p className="text-muted">Search Results:</p>
-                        {listDataCards}
+                        {resultLoading ? loadingPage : listDataCards}
                     </Col>
                     <Col></Col>
                 </Row>

@@ -56,28 +56,24 @@ const home = () => {
             </h2></div>
             <Container>
                 <Row style={{ height: "200px" }}>
-                    <Col style={{
+                    <Col md={{span: 3, offset: 3}} style={{
                         borderRadius: "5px",
                         borderBottomRightRadius: "30px",
                         backgroundColor: "#00A99D",
                         color: "whitesmoke",
-                        fontWeight: "bold"
                     }}>
                         <p style={{ paddingTop: "10px" }}>
                             With QualiDII, you can have production-like data at the click of a button. We control access to the data, so you don't have to worry about it.
                         </p>
                     </Col>
-                    <Col>
-                        {/* <p style={{ paddingTop: "10px" }}>
-                            One-Click checkout makes checking out data a snap! No need to manage access control, we do it for you!
-                        </p> */}
-                    </Col>
-                    <Col style={{
+                </Row>
+                <Row style={{height: "200px"}}>
+                    <Col md={{span: 3, offset:7}}
+                    style={{
                         borderRadius: "5px",
                         borderBottomLeftRadius: "30px",
-                        backgroundColor: "#00A99D",
+                        backgroundColor: "gold",
                         color: "whitesmoke",
-                        fontWeight: "bold"
                     }}>
                         <p style={{ paddingTop: "10px" }}>
                             Self Service is a seemles, easy experience with QualiDII self service portal!
@@ -85,11 +81,16 @@ const home = () => {
                     </Col>
                 </Row>
                 <Row style={{
-                    backgroundColor: "#2a2559",
-                    marginTop: "10px",
-                    borderRadius: "5px"
+                    height:"200px"
                 }}>
-                    <Col md={{ span: 6, offset: 1 }} style={{ color: "whiteSmoke" }}>
+                    <Col md={{ span: 3, offset: 3 }} 
+                    style={{ 
+                        color: "whiteSmoke", 
+                        backgroundColor: "#2a2559",
+                        marginTop: "10px",
+                        borderRadius: "5px",
+                        borderBottomRightRadius: "30px"
+                        }}>
                         <h2 >Data Profiles!</h2>
                         <p>With use of the data profile system, you can request specific test data for your project!</p>
                     </Col>
