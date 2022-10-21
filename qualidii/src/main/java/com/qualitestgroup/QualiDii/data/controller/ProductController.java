@@ -17,6 +17,7 @@ import java.util.List;
 
 import static com.qualitestgroup.QualiDii.TdpApplication.dataDict;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/products")
 public class ProductController {
