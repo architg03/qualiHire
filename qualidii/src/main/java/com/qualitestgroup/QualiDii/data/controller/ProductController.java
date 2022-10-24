@@ -17,7 +17,6 @@ import java.util.List;
 
 import static com.qualitestgroup.QualiDii.TdpApplication.dataDict;
 
-@CrossOrigin
 @RestController
 @CrossOrigin(origins = "http://localhost:8080/")
 @RequestMapping("/products")
