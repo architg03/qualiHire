@@ -16,6 +16,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:8080/")
 public class UserController {
     @Autowired
     private EntityManager em;
@@ -25,6 +26,7 @@ public class UserController {
     private ProductRepository PRepository;
 
     @GetMapping("")
+    @CrossOrigin
     public List<User> findByFNameOrLName(@RequestBody User user){
         boolean FNameNotNull = user.getFName() != null;
         boolean LNameNotNull = user.getLName() != null;
@@ -44,6 +46,7 @@ public class UserController {
 
     @PostMapping("/data/{id}")
     @Modifying
+    @CrossOrigin
     @Transactional
     public void addData(@PathVariable long id, @RequestBody Product product){
         User user = repository.getReferenceById(id);
@@ -61,6 +64,7 @@ public class UserController {
     }
 
     @PutMapping("/addUser")
+    @CrossOrigin
     public void addUser(@RequestBody User user){
         if(user.getFName() == null || user.getLName() == null){
             throw new RuntimeException("First name or Last name is null");

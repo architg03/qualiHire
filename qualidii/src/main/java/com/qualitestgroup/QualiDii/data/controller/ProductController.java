@@ -19,6 +19,7 @@ import static com.qualitestgroup.QualiDii.TdpApplication.dataDict;
 
 @CrossOrigin
 @RestController
+@CrossOrigin(origins = "http://localhost:8080/")
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
@@ -29,6 +30,7 @@ public class ProductController {
     private RequestRepository RRepo;
 
     @GetMapping("/search")
+    @CrossOrigin
     public List<Product> findByJSON(@RequestBody Product product){
         boolean nameNotNull = product.getName() != null;
         boolean tokenNotNull = product.getType() != null;
@@ -49,6 +51,7 @@ public class ProductController {
 
     @Transactional
     @Modifying
+    @CrossOrigin
     @PostMapping("/unlock")
     public void deleteUser(@RequestBody Product ProductID){
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
@@ -72,6 +75,7 @@ public class ProductController {
     }
     @Transactional
     @Modifying
+    @CrossOrigin
     @PostMapping("/unlockProfile")
     public void deleteProfile(@RequestBody Product ProductID){
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
@@ -91,6 +95,7 @@ public class ProductController {
     }
 
     @PutMapping("/addData")
+    @CrossOrigin
     @Transactional
     public void addProduct(@RequestBody Product product){
 

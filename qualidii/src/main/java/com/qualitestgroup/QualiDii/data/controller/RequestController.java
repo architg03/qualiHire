@@ -11,6 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
+@CrossOrigin(origins = "http://localhost:8080/")
 @RequestMapping("/requests")
 public class RequestController {
     @Autowired
@@ -18,6 +19,7 @@ public class RequestController {
     @Autowired
     RequestRepository repository;
     @GetMapping("/search")
+    @CrossOrigin
     public List<Request> searchRequests(Long id){
         if(id == null || id.toString().isEmpty()){
             return repository.findAll();
