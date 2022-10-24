@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:8080/")
+@CrossOrigin
 public class UserController {
     @Autowired
     private EntityManager em;

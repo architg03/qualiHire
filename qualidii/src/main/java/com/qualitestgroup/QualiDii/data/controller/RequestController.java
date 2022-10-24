@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080/")
+@CrossOrigin
 @RequestMapping("/requests")
 public class RequestController {
     @Autowired
