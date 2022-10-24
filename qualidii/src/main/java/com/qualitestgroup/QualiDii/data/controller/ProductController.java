@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 import static com.qualitestgroup.QualiDii.TdpApplication.dataDict;
