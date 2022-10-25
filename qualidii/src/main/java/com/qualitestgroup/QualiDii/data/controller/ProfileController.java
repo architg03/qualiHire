@@ -27,19 +27,19 @@ public class ProfileController {
     private ProductRepository PRepository;
     @GetMapping("/search")
     @CrossOrigin
-    public List<Profile> findByJSON(@RequestBody Profile Profile){
-        boolean titleNotNull = Profile.getTitle() != null;
-        boolean descNotNull = Profile.getDescription() != null;
+    public List<Profile> findByJSON(String title, String description){
+        boolean titleNotNull = title != null;
+        boolean descNotNull = description != null;
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Profile p");
         //If the name has anything in it, then we add the name to the search query
-        if(titleNotNull && !Profile.getTitle().isEmpty()){
+        if(titleNotNull && !title.isEmpty()){
             builder.where.add("p.title = :title");
-            builder.setParameter("title", Profile.getTitle());
+            builder.setParameter("title", title);
         }
         //If the token has anything in it, then we add the token to the search query
-        if(descNotNull && !Profile.getDescription().isEmpty()){
+        if(descNotNull && !description.isEmpty()){
             builder.where.add("p.description = :description");
-            builder.setParameter("description",Profile.getDescription());
+            builder.setParameter("description",description);
         }
 
         return builder.createQuery(em,Profile.class).getResultList();

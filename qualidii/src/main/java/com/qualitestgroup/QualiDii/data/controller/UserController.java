@@ -25,21 +25,21 @@ public class UserController {
     @Autowired
     private ProductRepository PRepository;
 
-    @GetMapping("")
+    @GetMapping("/search")
     @CrossOrigin
-    public List<User> findByFNameOrLName(@RequestBody User user){
-        boolean FNameNotNull = user.getFName() != null;
-        boolean LNameNotNull = user.getLName() != null;
+    public List<User> findByFNameOrLName(String fName, String lName){
+        boolean FNameNotNull = fName != null;
+        boolean LNameNotNull = lName != null;
         QueryBuilder builder = new QueryBuilder().select.add("u").from.add("User u");
         //If there is anything in the FName, then we add it to the search query.
-        if(FNameNotNull && !user.getFName().isEmpty()) {
+        if(FNameNotNull && !fName.isEmpty()) {
             builder.where.add("u.FName = :Fname");
-            builder.setParameter("Fname", user.getFName());
+            builder.setParameter("Fname", fName);
         }
         //If there is anything in LName, then we add it to the search query.
-        if(LNameNotNull && !user.getLName().isEmpty()){
+        if(LNameNotNull && !lName.isEmpty()){
             builder.where.add("u.LName = :Lname");
-            builder.setParameter("Lname",user.getLName());
+            builder.setParameter("Lname",lName);
         }
         return builder.createQuery(em,User.class).getResultList();
     }

@@ -30,20 +30,20 @@ public class ProductController {
     private RequestRepository RRepo;
 
     @CrossOrigin
-    @GetMapping("/search")
-    public List<Product> findByJSON(@RequestBody Product product){
-        boolean nameNotNull = product.getName() != null;
-        boolean tokenNotNull = product.getType() != null;
+    @GetMapping(value = "/search", produces={"application/json"})
+    public List<Product> findByJSON(String productName, String productType){
+        boolean nameNotNull = productName != null;
+        boolean tokenNotNull = productType != null;
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
         //If the name has anything in it, then we add the name to the search query
-        if(nameNotNull && !product.getName().isEmpty()){
+        if(nameNotNull && !productName.isEmpty()){
             builder.where.add("p.name = :name");
-            builder.setParameter("name", product.getName());
+            builder.setParameter("name", productName);
         }
         //If the token has anything in it, then we add the token to the search query
-        if(tokenNotNull && !product.getType().isEmpty()){
+        if(tokenNotNull && !productType.isEmpty()){
             builder.where.add("p.type = :type");
-            builder.setParameter("type",product.getType());
+            builder.setParameter("type",productType);
         }
 
         return builder.createQuery(em,Product.class).getResultList();
