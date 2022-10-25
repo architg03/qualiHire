@@ -29,8 +29,8 @@ public class ProductController {
     @Autowired
     private RequestRepository RRepo;
 
-    @GetMapping("/search")
     @CrossOrigin
+    @GetMapping("/search")
     public List<Product> findByJSON(@RequestBody Product product){
         boolean nameNotNull = product.getName() != null;
         boolean tokenNotNull = product.getType() != null;

@@ -36,11 +36,7 @@ const Product = (props) => {
   const [resultLoading, setResultLoading] = useState(true);
   useEffect(() => {
     const getData = async () => {
-      const result = await axios.get("product/search", 
-      {
-        name: "",
-        type: "",
-      });
+      const result = await axios.get("product/search", {params: {type: "", name: ""}});
       setSearchResult(result);
       setResultLoading(false);
     };
