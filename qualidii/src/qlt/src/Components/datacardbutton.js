@@ -32,6 +32,9 @@ const DataCardButton = (props) => {
 
     const [isLoading, setLoading] = useState(false);
     const [button, setButton] = useState(buttonConfigManager());
+    
+        
+    
 
     function buttonConfigManager() {
         if (props.userLoggedIn.userId === props.productOwner) {
@@ -48,8 +51,15 @@ const DataCardButton = (props) => {
     //call setButton in here
     function buttonOnClickHandler() {
         setLoading(true);
-        axios.put()
-        setButton(button.text === "Available" ? dataButtonConfig["owned"] : dataButtonConfig["available"]);
+
+        //TODO: Fix post to update component state
+        axios.post(
+            `/users/data/${props.userLoggedIn.id}`,
+            {
+                data:
+                {productId: `${props.id}`}
+            })
+            .then( setButton(button.text === "Available" ? dataButtonConfig["owned"] : dataButtonConfig["available"]));
     };
 
     return (

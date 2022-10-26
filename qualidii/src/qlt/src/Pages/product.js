@@ -16,14 +16,6 @@ const Product = (props) => {
   //result state management
   const [searchResult, setSearchResult] = useState([]);
   const [resultLoading, setResultLoading] = useState(true);
-  useEffect(() => {
-    const getData = async () => {
-      const result = await axios.get("products/search", {params: {productName: "", productType: ""}});
-      setSearchResult(JSON.parse(result.request.response));
-      setResultLoading(false);
-    };
-    getData();
-  }, []);
 
   //state held here, managed in searchbar
   const [inputText, setInputText] = useState("");
@@ -31,6 +23,14 @@ const Product = (props) => {
   //profiles fetched on page load,TODO: need to add handler to search within profile
   const [profile, setProfile] = useState(null);
   const [profiles, setProfiles] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const result = await axios.get("products/search", {params: {productName: "", productType: ""}});
+      setSearchResult(JSON.parse(result.request.response));
+      setResultLoading(false);
+    };
+    getData();
+  }, [profile]);
 
   //API call to fetch all products on page load
 
@@ -47,7 +47,7 @@ const Product = (props) => {
   );
 
   //request all profiles on page load
-  axios.get("profile/list").then((response) => {
+  axios.get("profiles/search", {data: {title: "", description: ""}}).then((response) => {
     setProfiles(response);
   });
 
@@ -79,7 +79,8 @@ const Product = (props) => {
     //mapping response from json to data cards
     listDataCards = filterData.map((result) => (
       <div key={result.id}>
-        <DataCard 
+        <DataCard
+        id={result.id} 
         type={result.type} 
         name={result.name} 
         userLoggedIn={props.user} />

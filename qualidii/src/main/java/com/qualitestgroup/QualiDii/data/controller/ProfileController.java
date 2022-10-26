@@ -26,7 +26,6 @@ public class ProfileController {
     @Autowired
     private ProductRepository PRepository;
     @GetMapping("/search")
-    @CrossOrigin
     public List<Profile> findByJSON(String title, String description){
         boolean titleNotNull = title != null;
         boolean descNotNull = description != null;
