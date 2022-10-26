@@ -12,32 +12,14 @@ import "../Components/dummyResponse.json";
 import axios from "../API/axiosconfig";
 
 const Product = (props) => {
-  const profileEx = {
-    profiles: [
-      {
-        UUID: 0,
-        type: "Retail",
-        returns: "A product with name and department",
-        title: "Big Mart test data",
-        desc: "Big Mart test items for online storefront.",
-      },
-      {
-        UUID: 1,
-        type: "Bank",
-        returns: "An account number, name, and balence",
-        title: "Big Bank Maxing",
-        desc: "Big bank test accounts for their new mobile application.",
-      },
-    ],
-  };
 
   //result state management
   const [searchResult, setSearchResult] = useState([]);
   const [resultLoading, setResultLoading] = useState(true);
   useEffect(() => {
     const getData = async () => {
-      const result = await axios.get("product/search", {params: {type: "", name: ""}});
-      setSearchResult(result);
+      const result = await axios.get("products/search", {params: {productName: "", productType: ""}});
+      setSearchResult(JSON.parse(result.request.response));
       setResultLoading(false);
     };
     getData();
@@ -86,7 +68,7 @@ const Product = (props) => {
   let listDataCards;
   try {
     profileDataHandler();
-    filterData = searchResult.response.filter((el) => {
+    filterData = searchResult.filter((el) => {
       if (inputText === "") {
         return el;
       } else {
@@ -97,12 +79,16 @@ const Product = (props) => {
     //mapping response from json to data cards
     listDataCards = filterData.map((result) => (
       <div key={result.id}>
-        <DataCard {...result} userLoggedIn={props.user} />
+        <DataCard 
+        type={result.type} 
+        name={result.name} 
+        userLoggedIn={props.user} />
       </div>
     ));
   } catch (e) {
     console.error(e);
   }
+
   console.log(searchResult);
   return (
     <>

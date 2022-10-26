@@ -15,7 +15,7 @@ const DataCard = (props) => {
                     <Row>
                         <div>
                             <Badge bg="secondary">
-                                {props.token}
+                                {props.type}
                             </Badge>
                         </div>
                     </Row>
