@@ -31,7 +31,7 @@ const dataButtonConfig = {
 const DataCardButton = (props) => {
   const [button, setButton] = useState(buttonConfigManager(props));
 
-  function buttonConfigManager() {
+  function buttonConfigManager(props) {
     if (props.userLoggedIn.userId === props.productOwner) {
       return dataButtonConfig["owned"];
     } else if (props.productOwner) {
@@ -47,7 +47,10 @@ const DataCardButton = (props) => {
       console.log(props);
       axios
         .post(`users/data/${props.userLoggedIn.userId}`, {
-          data: { productId: props.productId},
+          data: { 
+            id: props.productId,
+            
+          },
         })
         .then(setButton(dataButtonConfig["owned"]))
         .catch()

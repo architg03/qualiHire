@@ -7,7 +7,6 @@ import DataCardButton from "./datacardbutton";
 
 const DataCard = (props) => {
 
-    //TODO: send request to server for locking of data
     return (
         <div style={{ padding: "5px" }}>
             <Stack style={{ width: "500px", height: "60px", borderRadius: "5px" }} direction="horizontal" className="border" gap={3}>
