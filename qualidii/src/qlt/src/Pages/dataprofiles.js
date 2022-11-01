@@ -8,35 +8,10 @@ import axios from 'axios';
 
 const DataProfiles = () => {
 
-    const profile = {
-        profiles: [
-            {
-                UUID: 0,
-                type: "Retail",
-                returns: "A product with name and department",
-                title: "Big Mart test data",
-                desc: "Big Mart test items for online storefront."
-            },
-            {
-                UUID: 1,
-                type: "Bank",
-                returns: "An account number, name, and balence",
-                title: "Big Bank Maxing",
-                desc: "Big bank test accounts for their new mobile application."
-            }
-        ]
-    };
-
     const [profiles, setProfiles] = useState(null);
 
     axios.get(
-        "/profiles/list",
-        {
-            "":
-            {
-                profile: "",
-            }
-        }
+        "/profiles/list",{params: ""}
     ).then((response)=>{setProfiles(response)});
 
 

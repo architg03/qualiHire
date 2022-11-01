@@ -30,8 +30,11 @@ const DataCard = (props) => {
                 <div className="ms-auto">
                     <DataCardButton
                         userLoggedIn={props.userLoggedIn}
-                        productOwner={props.userID}
+                        productOwner={props.ownerID}
                         ownerName={props.user}
+                        productId = {props.id}
+                        productName={props.name}
+                        productType={props.type}
                     />
                 </div>
             </Stack>

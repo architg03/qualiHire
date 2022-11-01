@@ -22,7 +22,6 @@ const Product = (props) => {
 
   //profiles fetched on page load,TODO: need to add handler to search within profile
   const [profile, setProfile] = useState(null);
-  const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const getData = async () => {
       const result = await axios.get("products/search", {params: {productName: "", productType: ""}});
@@ -31,6 +30,15 @@ const Product = (props) => {
     };
     getData();
   }, [profile]);
+
+  const [profiles, setProfiles] = useState([]);
+  useEffect(()=>{
+    const getProfiles = async()=>{
+      const result = await axios.get("profile/search", {data:{title: ""}});
+      setProfiles(JSON.parse(result.request.response));
+    }
+    getProfiles();
+  },[])
 
   //API call to fetch all products on page load
 
@@ -45,11 +53,6 @@ const Product = (props) => {
       <p className="text-muted">Fetching results...</p>
     </div>
   );
-
-  //request all profiles on page load
-  axios.get("profiles/search", {data: {title: "", description: ""}}).then((response) => {
-    setProfiles(response);
-  });
 
   //maps search data to data within profile
   const profileDataHandler = () => {
@@ -83,14 +86,14 @@ const Product = (props) => {
         id={result.id} 
         type={result.type} 
         name={result.name} 
-        userLoggedIn={props.user} />
+        userLoggedIn={props.user}
+        ownerID = {result.userID}
+        />
       </div>
     ));
   } catch (e) {
     console.error(e);
   }
-
-  console.log(searchResult);
   return (
     <>
       <NavBar

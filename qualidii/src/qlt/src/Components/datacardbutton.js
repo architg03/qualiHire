@@ -1,71 +1,67 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import axios from "../API/axiosconfig";
+import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
 
 const dataButtonConfig = {
-    available: {
-        text: "Available",
-        variant: "flat",
-        disabled: false,
-        class: "available"
-    },
-    unavailable: {
-        text: "Unavailable",
-        variant: "flat",
-        disabled: true,
-        class: "taken"
-    },
-    owned: {
-        text: "Release",
-        variant: "flat",
-        disabled: false,
-        class: "owned"
-    },
-    loading: {
-        text: "Loading...",
-        variant: "flat",
-        disabled: true,
-    }
+  available: {
+    text: "Available",
+    variant: "flat",
+    disabled: false,
+    class: "available",
+  },
+  unavailable: {
+    text: "Unavailable",
+    variant: "flat",
+    disabled: true,
+    class: "taken",
+  },
+  owned: {
+    text: "Release",
+    variant: "flat",
+    disabled: false,
+    class: "owned",
+  },
+  loading: {
+    text: "Loading...",
+    variant: "flat",
+    disabled: true,
+  },
 };
 
 const DataCardButton = (props) => {
+  const [button, setButton] = useState(buttonConfigManager(props));
 
-    const [isLoading, setLoading] = useState(false);
-    const [button, setButton] = useState(buttonConfigManager());
-    
-        
-    
-
-    function buttonConfigManager() {
-        if (props.userLoggedIn.userId === props.productOwner) {
-            return dataButtonConfig["owned"];
-        }
-        else if (props.productOwner) {
-            return dataButtonConfig["unavailable"];
-        }
-        else {
-            return dataButtonConfig["available"];
-        }
+  function buttonConfigManager() {
+    if (props.userLoggedIn.userId === props.productOwner) {
+      return dataButtonConfig["owned"];
+    } else if (props.productOwner) {
+      return dataButtonConfig["unavailable"];
+    } else {
+      return dataButtonConfig["available"];
     }
+  }
 
-    //call setButton in here
-    function buttonOnClickHandler() {
-        setLoading(true);
+  //call setButton in here
+  function buttonOnClickHandler() {
+    if (button.text === "Available") {
+      console.log(props);
+      axios
+        .post(`users/data/${props.userLoggedIn.userId}`, {
+          data: { productId: props.productId},
+        })
+        .then(setButton(dataButtonConfig["owned"]))
+        .catch()
+    } else if (button.text === "Release") {
+      axios
+        .post("products/unlock", { data: { productId: props.productId } })
+        .then(setButton(dataButtonConfig["available"]));
+    }
+  }
 
-        //TODO: Fix post to update component state
-        axios.post(
-            `/users/data/${props.userLoggedIn.id}`,
-            {
-                data:
-                {productId: `${props.id}`}
-            })
-            .then( setButton(button.text === "Available" ? dataButtonConfig["owned"] : dataButtonConfig["available"]));
-    };
-
-    return (
-        <>
-            <style type='text/css'>
-                {`
+  return (
+    <>
+      <style type="text/css">
+        {`
                 .btn:focus, .btn:active{
                     outline: none !important;
                     outline-offset: none !important;
@@ -103,20 +99,18 @@ const DataCardButton = (props) => {
                     content: "Checked out by: ${props.ownerName}";
                 }
             `}
-            </style>
-            <Button
-                variant={`${button.variant}`}
-                className={`${button.class}`}
-                style={{ margin: "5px" }}
-                disabled={button.disabled}
-                onClick={buttonOnClickHandler}
-            >
-                <span>
-                    {button.text}
-                </span>
-            </Button>
-        </>
-    );
-}
+      </style>
+      <Button
+        variant={`${button.variant}`}
+        className={`${button.class}`}
+        style={{ margin: "5px" }}
+        disabled={button.disabled}
+        onClick={buttonOnClickHandler}
+      >
+        <span>{button.text}</span>
+      </Button>
+    </>
+  );
+};
 
 export default DataCardButton;
