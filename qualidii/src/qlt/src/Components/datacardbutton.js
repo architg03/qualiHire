@@ -32,7 +32,7 @@ const DataCardButton = (props) => {
   const [button, setButton] = useState(buttonConfigManager(props));
 
   function buttonConfigManager(props) {
-    if (props.userLoggedIn.userId === props.productOwner) {
+    if (props.userLoggedIn.userID === props.productOwner) {
       return dataButtonConfig["owned"];
     } else if (props.productOwner) {
       return dataButtonConfig["unavailable"];
@@ -44,23 +44,16 @@ const DataCardButton = (props) => {
   //call setButton in here
   function buttonOnClickHandler() {
     if (button.text === "Available") {
-      console.log(props);
       axios
-        .post(`users/data/${props.userLoggedIn.userId}`, {
-          data: { 
-            id: props.productId,
-            
-          },
-        })
+        .post(`users/data/${props.userLoggedIn.userID}`, {ProductID: props.productId})
         .then(setButton(dataButtonConfig["owned"]))
-        .catch()
+        .then(console.log(props))
     } else if (button.text === "Release") {
       axios
         .post("products/unlock", { data: { productId: props.productId } })
         .then(setButton(dataButtonConfig["available"]));
     }
   }
-
   return (
     <>
       <style type="text/css">

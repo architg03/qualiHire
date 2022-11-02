@@ -94,7 +94,7 @@ const Product = (props) => {
   } catch (e) {
     console.error(e);
   }
-  console.log(searchResult);
+  
   return (
     <>
       <NavBar

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import java.net.http.HttpHeaders;
 import java.util.List;
+import com.google.gson.*;
 
 @RestController
 @RequestMapping("/users")
@@ -48,11 +49,15 @@ public class UserController {
     @Modifying
     @CrossOrigin
     @Transactional
-    public void addData(@PathVariable long id, @RequestBody Product product){
+    public void addData(@PathVariable long id, @RequestBody String Product){
+
+        JsonObject jsonObj = new JsonParser().parse(Product).getAsJsonObject();
+        Long productID = jsonObj.get("ProductID").getAsLong();
+        
         User user = repository.getReferenceById(id);
-        product = em.find(Product.class,product.getId());
+        Product product = em.find(Product.class, productID);
         QueryBuilder builder = new QueryBuilder().select.add("t").from.add("Product t");
-        builder = buildQuery(builder,"id",product.getId());
+        builder = buildQuery(builder,"id", product.getId());
         builder.where.add("t.user IS NULL");
 
         product = builder.createQuery(em,Product.class).getSingleResult();
