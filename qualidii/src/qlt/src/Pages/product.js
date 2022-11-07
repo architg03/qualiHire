@@ -12,7 +12,6 @@ import "../Components/dummyResponse.json";
 import axios from "../API/axiosconfig";
 
 const Product = (props) => {
-
   //result state management
   const [searchResult, setSearchResult] = useState([]);
   const [resultLoading, setResultLoading] = useState(true);
@@ -24,7 +23,9 @@ const Product = (props) => {
   const [profile, setProfile] = useState(null);
   useEffect(() => {
     const getData = async () => {
-      const result = await axios.get("products/search", {params: {productName: "", productType: ""}});
+      const result = await axios.get("products/search", {
+        params: { productName: "", productType: "" },
+      });
       setSearchResult(JSON.parse(result.request.response));
       setResultLoading(false);
     };
@@ -32,13 +33,13 @@ const Product = (props) => {
   }, [profile]);
 
   const [profiles, setProfiles] = useState([]);
-  useEffect(()=>{
-    const getProfiles = async()=>{
-      const result = await axios.get("profile/search", {data:{title: ""}});
+  useEffect(() => {
+    const getProfiles = async () => {
+      const result = await axios.get("profile/search", { data: { title: "" } });
       setProfiles(JSON.parse(result.request.response));
-    }
+    };
     getProfiles();
-  },[])
+  }, []);
 
   //API call to fetch all products on page load
 
@@ -83,20 +84,20 @@ const Product = (props) => {
     listDataCards = filterData.map((result) => (
       <div key={result.id}>
         <DataCard
-        id={result.id} 
-        type={result.type} 
-        name={result.name} 
-        userLoggedIn={props.user}
-        ownerID = {result.userID}
+          id={result.id}
+          type={result.type}
+          name={result.name}
+          userLoggedIn={props.user}
+          ownerID={result.userID}
         />
       </div>
     ));
   } catch (e) {
     console.error(e);
   }
-  
+
   return (
-    <>
+    <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
       <NavBar
         style={{
           backgroundColor: "#2a2559",
@@ -129,7 +130,7 @@ const Product = (props) => {
           <Col></Col>
         </Row>
       </Container>
-    </>
+    </Container>
   );
 };
 

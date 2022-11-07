@@ -7,7 +7,6 @@ import Badge from "react-bootstrap/Badge";
 import axios from "../API/axiosconfig";
 
 const DataProfiles = () => {
-
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -39,17 +38,19 @@ const DataProfiles = () => {
   }
 
   return (
-    <Container style={{ marginTop: "50px" }}>
-      <Row>
-        <Col>
-          <h2>Manage Profiles</h2>
-          <Accordian>{listProfiles}</Accordian>
-        </Col>
-        <Col>
-          <h2>Create Profiles</h2>
-          <p>Working on it...</p>
-        </Col>
-      </Row>
+    <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
+      <Container style={{ marginTop: "50px" }}>
+        <Row>
+          <Col>
+            <h2>Manage Profiles</h2>
+            <Accordian>{listProfiles}</Accordian>
+          </Col>
+          <Col>
+            <h2>Create Profiles</h2>
+            <p>Working on it...</p>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 };

@@ -31,7 +31,6 @@ const NavbarController = () => {
     <HashRouter style={{ backgroundColor: "whitesmoke" }}>
       <Stack gap={3}>
         <Navbar />
-        <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
           <Routes>
             <Route path="/" element={<Home user={user} />} />
             <Route path="/home" element={<Home user={user} />} />
@@ -45,7 +44,6 @@ const NavbarController = () => {
               element={<DataProfiles user={user} />}
             />
           </Routes>
-        </Container>
         <Footer />
       </Stack>
     </HashRouter>
