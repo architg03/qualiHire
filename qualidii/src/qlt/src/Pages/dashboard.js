@@ -1,5 +1,7 @@
 import React from "react";
 import {useState, useEffect} from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Accordion from 'react-bootstrap/Accordion';
 import DataCard from "../Components/datacard";
 import Container from "react-bootstrap/Container";
 import axios from "../API/axiosconfig"
@@ -36,7 +38,6 @@ const Dashboard = (props) => {
       );
   });
 
-  console.log(products);
   return (
     <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
       <Row>
@@ -44,7 +45,7 @@ const Dashboard = (props) => {
           <Container>
             <div style={{ height: "60px" }}></div>
             <Container>
-              <h2>Data Checked Out</h2>
+              <h2>My Data</h2>
               {myDataCards}
             </Container>
           </Container>

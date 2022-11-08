@@ -45,12 +45,12 @@ const DataCardButton = (props) => {
   function buttonOnClickHandler() {
     if (button.text === "Available") {
       axios
-        .post(`users/data/${props.userLoggedIn.userID}`, {ProductID: props.productId})
+        .post(`users/data/${props.userLoggedIn}`, {ProductID: props.productId})
         .then(setButton(dataButtonConfig["owned"]))
         .then(console.log(props))
     } else if (button.text === "Release") {
       axios
-        .post("products/unlock", { data: { productId: props.productId } })
+        .post("products/unlock", { ProductId: props.productId } )
         .then(setButton(dataButtonConfig["available"]));
     }
   }

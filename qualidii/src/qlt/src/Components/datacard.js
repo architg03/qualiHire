@@ -6,7 +6,6 @@ import Badge from 'react-bootstrap/Badge';
 import DataCardButton from "./datacardbutton";
 
 const DataCard = (props) => {
-    console.log(props);
     return (
         <div style={{ padding: "5px" }}>
             <Stack style={{ width: "500px", height: "60px", borderRadius: "5px" }} direction="horizontal" className="border" gap={3}>
