@@ -24,9 +24,10 @@ const NavbarController = () => {
     });
     setUser(JSON.parse(res.request.response)[0]);
   };
+ 
 
   const [user, setUser] = useState(fetchUser);
-
+  console.log(user);
   return (
     <HashRouter style={{ backgroundColor: "whitesmoke" }}>
       <Stack gap={3}>

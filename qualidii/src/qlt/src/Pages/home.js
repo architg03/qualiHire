@@ -78,7 +78,7 @@ const home = () => {
                 <Card.Img src={image4}/>
                 <Card.Body>
                   <Card.Title>Data</Card.Title>
-                  <Card.Text>Seemless, easy, self-service experience to meet your needs!</Card.Text>
+                  <Card.Text>Seemless, easy, self-service experience to meet your test data management needs!</Card.Text>
                 </Card.Body>
               </Card>
             </Col>

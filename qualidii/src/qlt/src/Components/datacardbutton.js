@@ -32,7 +32,7 @@ const DataCardButton = (props) => {
   const [button, setButton] = useState(buttonConfigManager(props));
 
   function buttonConfigManager(props) {
-    if (props.userLoggedIn.userID === props.productOwner) {
+    if (props.userLoggedIn === props.productOwner) {
       return dataButtonConfig["owned"];
     } else if (props.productOwner) {
       return dataButtonConfig["unavailable"];

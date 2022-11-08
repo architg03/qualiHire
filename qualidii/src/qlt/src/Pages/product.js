@@ -87,7 +87,7 @@ const Product = (props) => {
           id={result.id}
           type={result.type}
           name={result.name}
-          userLoggedIn={props.user}
+          userLoggedIn={props.user.userID}
           ownerID={result.userID}
         />
       </div>

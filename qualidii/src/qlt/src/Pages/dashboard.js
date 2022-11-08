@@ -1,24 +1,42 @@
 import React from "react";
+import {useState, useEffect} from 'react';
 import DataCard from "../Components/datacard";
 import Container from "react-bootstrap/Container";
+import axios from "../API/axiosconfig"
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "../Components/dummyResponse.json";
+
 
 const Dashboard = (props) => {
-  let response = require("../Components/dummyResponse.json");
 
-  const myDataCards = response.response.map((result) => {
-    if (props.user.userId === result.userID) {
-      return (
-        <div key={result.id}>
-          <DataCard {...result} userLoggedIn={props.user} />
-        </div>
-      );
+  const [products, setProducts] = useState([]);
+  useEffect(()=>{
+    const checkData = async () => {
+      const res = await axios.get("/users/search", {
+        data: {firstName: `${props.user.fname}`, lName: `${props.user.lname}`}
+      })
+      const user = JSON.parse(res.request.response)[0];
+      setProducts(user.products);
     }
-    return null;
+    checkData();
+  }, []);
+ 
+
+  const myDataCards = products.map((product) => {
+       return (
+         <div key={product.id}>
+           <DataCard 
+           ownerID={props.user.userID}  
+           userLoggedIn={props.user.userID}
+           id={product.id}
+           name={product.name}
+           type={product.type}
+            />
+         </div>
+      );
   });
 
+  console.log(products);
   return (
     <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
       <Row>
