@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import Stack from "react-bootstrap/esm/Stack";
-import Container from "react-bootstrap/esm/Container";
 import Home from "../Pages/home";
 import Navbar from "./Navbar";
 import Dashboard from "../Pages/dashboard";
