@@ -13,7 +13,7 @@ import Row from "react-bootstrap/Row";
 const Dashboard = (props) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    const checkData = async () => {
+    const checkData = async (props) => {
       const res = await axios.get("/users/search", {
         data: {
           firstName: `${props.user.fname}`,
@@ -23,7 +23,7 @@ const Dashboard = (props) => {
       const user = JSON.parse(res.request.response)[0];
       setProducts(user.products);
     };
-    checkData();
+    checkData(props);
   }, []);
 
   const myDataCards = products.map((product) => {
@@ -40,6 +40,12 @@ const Dashboard = (props) => {
     );
   });
 
+  const releaseAllHandler = (props) => {
+    for(let i = 0; i < props.user.products.length; i++ ){
+      axios.post("/products/unlock", {data: {ProductID: `${props.user.products[i].id}`}})
+    }
+  };
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -47,18 +53,14 @@ const Dashboard = (props) => {
 
   return (
     <>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        centered
-        dialogClassName="modal-70w"
-        scrollable
-      >
+      <Modal show={show} onHide={handleClose} centered size="lg" scrollable>
         <Modal.Header closeButton>
           <Modal.Title>All Data</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>{myDataCards}</div>
+          <Container>
+            <div style={{ marginLeft: "15%" }}>{myDataCards}</div>
+          </Container>
         </Modal.Body>
       </Modal>
       <Container style={{ marginTop: "60px", paddingBottom: "50px" }}>
