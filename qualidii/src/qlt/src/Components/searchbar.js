@@ -17,9 +17,7 @@ try {
                 <Badge>{p.type}</Badge>
             </Dropdown.Item>    
         );
-} catch(e) {
-    console.log(e);
-}
+} catch(e) {}
 
 let onSearchSubmit = () => {
     var Tokens = inputText.toLowerCase().split(" ");

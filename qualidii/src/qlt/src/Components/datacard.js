@@ -6,8 +6,6 @@ import Badge from 'react-bootstrap/Badge';
 import DataCardButton from "./datacardbutton";
 
 const DataCard = (props) => {
-
-    //TODO: send request to server for locking of data
     return (
         <div style={{ padding: "5px" }}>
             <Stack style={{ width: "500px", height: "60px", borderRadius: "5px" }} direction="horizontal" className="border" gap={3}>
@@ -15,7 +13,7 @@ const DataCard = (props) => {
                     <Row>
                         <div>
                             <Badge bg="secondary">
-                                {props.token}
+                                {props.type}
                             </Badge>
                         </div>
                     </Row>
@@ -30,8 +28,11 @@ const DataCard = (props) => {
                 <div className="ms-auto">
                     <DataCardButton
                         userLoggedIn={props.userLoggedIn}
-                        productOwner={props.userID}
+                        productOwner={props.ownerID}
                         ownerName={props.user}
+                        productId = {props.id}
+                        productName={props.name}
+                        productType={props.type}
                     />
                 </div>
             </Stack>

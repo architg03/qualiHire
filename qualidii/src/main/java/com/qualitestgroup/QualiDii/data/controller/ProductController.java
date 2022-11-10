@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 import static com.qualitestgroup.QualiDii.TdpApplication.dataDict;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
@@ -27,20 +29,21 @@ public class ProductController {
     @Autowired
     private RequestRepository RRepo;
 
-    @GetMapping("/search")
-    public List<Product> findByJSON(@RequestBody Product product){
-        boolean nameNotNull = product.getName() != null;
-        boolean tokenNotNull = product.getType() != null;
+    @CrossOrigin
+    @GetMapping(value = "/search", produces={"application/json"})
+    public List<Product> findByJSON(String productName, String productType){
+        boolean nameNotNull = productName != null;
+        boolean tokenNotNull = productType != null;
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
         //If the name has anything in it, then we add the name to the search query
-        if(nameNotNull && !product.getName().isEmpty()){
+        if(nameNotNull && !productName.isEmpty()){
             builder.where.add("p.name = :name");
-            builder.setParameter("name", product.getName());
+            builder.setParameter("name", productName);
         }
         //If the token has anything in it, then we add the token to the search query
-        if(tokenNotNull && !product.getType().isEmpty()){
+        if(tokenNotNull && !productType.isEmpty()){
             builder.where.add("p.type = :type");
-            builder.setParameter("type",product.getType());
+            builder.setParameter("type",productType);
         }
 
         return builder.createQuery(em,Product.class).getResultList();
@@ -48,6 +51,7 @@ public class ProductController {
 
     @Transactional
     @Modifying
+    @CrossOrigin
     @PostMapping("/unlock")
     public void deleteUser(@RequestBody Product ProductID){
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
@@ -71,6 +75,7 @@ public class ProductController {
     }
     @Transactional
     @Modifying
+    @CrossOrigin
     @PostMapping("/unlockProfile")
     public void deleteProfile(@RequestBody Product ProductID){
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Product p");
@@ -90,6 +95,7 @@ public class ProductController {
     }
 
     @PutMapping("/addData")
+    @CrossOrigin
     @Transactional
     public void addProduct(@RequestBody Product product){
 

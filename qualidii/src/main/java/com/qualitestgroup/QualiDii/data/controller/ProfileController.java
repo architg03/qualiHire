@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.net.http.HttpHeaders;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/profile")
 public class ProfileController {
     @Autowired
@@ -23,20 +25,21 @@ public class ProfileController {
     ProfileRepository repository;
     @Autowired
     private ProductRepository PRepository;
+    @CrossOrigin
     @GetMapping("/search")
-    public List<Profile> findByJSON(@RequestBody Profile Profile){
-        boolean titleNotNull = Profile.getTitle() != null;
-        boolean descNotNull = Profile.getDescription() != null;
+    public List<Profile> findByJSON(String title, String description){
+        boolean titleNotNull = title != null;
+        boolean descNotNull = description != null;
         QueryBuilder builder = new QueryBuilder().select.add("p").from.add("Profile p");
         //If the name has anything in it, then we add the name to the search query
-        if(titleNotNull && !Profile.getTitle().isEmpty()){
+        if(titleNotNull && !title.isEmpty()){
             builder.where.add("p.title = :title");
-            builder.setParameter("title", Profile.getTitle());
+            builder.setParameter("title", title);
         }
         //If the token has anything in it, then we add the token to the search query
-        if(descNotNull && !Profile.getDescription().isEmpty()){
+        if(descNotNull && !description.isEmpty()){
             builder.where.add("p.description = :description");
-            builder.setParameter("description",Profile.getDescription());
+            builder.setParameter("description",description);
         }
 
         return builder.createQuery(em,Profile.class).getResultList();
@@ -44,6 +47,7 @@ public class ProfileController {
 
     @PostMapping("/data/{id}")
     @Modifying
+    @CrossOrigin
     @Transactional
     public void addData(@PathVariable long id, @RequestBody Product product){
         Profile profile = repository.getReferenceById(id);
@@ -61,6 +65,7 @@ public class ProfileController {
     }
 
     @PutMapping("/create")
+    @CrossOrigin
     @Transactional
     public void createProfile(@RequestBody Profile profile){
         em.persist(profile.getExampleData());
@@ -69,6 +74,7 @@ public class ProfileController {
 
     @PostMapping("/remove/{id}")
     @Transactional
+    @CrossOrigin
     @Modifying
     public void removeData(@PathVariable long id, @RequestBody Product product){
         QueryBuilder builder = new QueryBuilder().select.add("t").from.add("Profile t");
