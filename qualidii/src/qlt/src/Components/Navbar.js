@@ -29,7 +29,7 @@ const Navbar = (user) => {
                         <NavDropdown title="Services">
                             <NavDropdown.Item href="/productsearch">
                                 <LinkContainer to="/productsearch">
-                                    <Nav.Link>Product Search</Nav.Link>
+                                    <Nav.Link>Company Search</Nav.Link>
                                 </LinkContainer>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
@@ -38,19 +38,9 @@ const Navbar = (user) => {
                                 </LinkContainer>
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <LinkContainer to="/contact">
-                            <Nav.Link>
-                                Contact Us
-                            </Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/support">
-                            <Nav.Link>Support</Nav.Link>
-                        </LinkContainer>
                     </Nav>
                     <Nav className="mr-auto">
-                        <LinkContainer to="/dashboard">
-                            <Nav.Link>Dashboard</Nav.Link>
-                        </LinkContainer>
+                        <a href="http://localhost:8501/">Dashboard</a>
                         <LinkContainer to="/SignIn">
                             <Nav.Link>{SignInText}</Nav.Link>
                         </LinkContainer>
