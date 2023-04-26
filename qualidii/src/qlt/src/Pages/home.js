@@ -7,30 +7,35 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Fade from "react-bootstrap/fade";
 import Ratio from "react-bootstrap/Ratio";
-import slide1 from "../Assets/shutterstock_1617365701.jpg";
-import slide2 from "../Assets/shutterstock_352324304.jpg";
-import slide3 from "../Assets/shutterstock_1028004997 (1).jpg";
-import image4 from "../Assets/shutterstock_762344239 (1).jpg"
+import slide1 from "../Assets/image.jpg";
+import slide2 from "../Assets/finger tap.jpg";
+import slide3 from "../Assets/circle of code.jpg";
+import image4 from "../Assets/AI.jpg"
+import { Link } from "react-router-dom";
 
 const home = () => {
   return (
     <Stack direction="vertical" gap={3}>
       <div style={{ marginTop: "50px" }}>
         <Card className="bg-dark text-white">
-          <Ratio aspectRatio={7 / 16}>
-            <Card.Img src={slide1} alt="background" style={{}} />
+          <Ratio aspectRatio={12 / 36}>
+            <Card.Img src={slide1} alt="background" style={{height:800, width:2500}} />
           </Ratio>
           <Fade in>
-            <Card.ImgOverlay style={{ marginTop: "17%", marginLeft: "10%" }}>
+            <Card.ImgOverlay style={{ marginTop: "22%", marginLeft: "47%" }}>
               <Card.Title>
                 <Fade in>
-                  <h1>QualiDII</h1>
+                  <h1>QualiHire</h1>
                 </Fade>
               </Card.Title>
-              <Card.Subtitle>Ituitive. Intellegent. Data.</Card.Subtitle>
+              <Card.Subtitle>AI Based Skill Mapping</Card.Subtitle>
               <div style={{ paddingTop: "1%" }}>
-                <Button>Log in</Button>
-                <Button style={{ marginLeft: "3%" }}>Sign up</Button>
+                <Link to="/signin">
+                  <Button style={{ marginLeft: "0%" }}>Log In</Button>
+                </Link>
+                <Link to="/signin">
+                  <Button style={{ marginLeft: "3%" }}>Sign up</Button>
+                </Link>
               </div>
             </Card.ImgOverlay>
           </Fade>
@@ -44,7 +49,7 @@ const home = () => {
             marginLeft: "7%",
           }}
         >
-          What is QualiDII?
+          What is QualiHire?
         </h1>
         <hr style={{ marginLeft: "7%" }} />
       </div>
@@ -55,30 +60,34 @@ const home = () => {
               <Card>
                 <Card.Img src={slide2} />
                 <Card.Body>
-                  <Card.Title>Intuitive</Card.Title>
+                  <Card.Title>AI Driven</Card.Title>
                   <Card.Text>
-                    QualiDII provides all your test data in one place. No need to search through hundreds of tables to get what you want!
-                  </Card.Text>
-                </Card.Body>
-              </Card>  
-            </Col>
-            <Col>
-              <Card>
-                <Card.Img src={slide3}/>
-                <Card.Body>
-                  <Card.Title>Intellegent</Card.Title>
-                  <Card.Text>
-                    Can't find data you are looking for? Request a Data Profile and we will find it for you!
+                    QualiHire uses various AI based match engines to give you the best representation of candidate matches to a specific job requisition!
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col>
               <Card>
-                <Card.Img src={image4}/>
+              <Ratio aspectRatio={8 / 14}>
+                <Card.Img src={slide3}/>
+                </Ratio>
                 <Card.Body>
-                  <Card.Title>Data</Card.Title>
-                  <Card.Text>Seemless, easy, self-service experience to meet your test data management needs!</Card.Text>
+                  <Card.Title>Flexible</Card.Title>
+                  <Card.Text>
+                    Looking for a quantitative representation of a candidates skills? Look no further with our one of a kind score based skill mapping solution!
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card>
+              <Ratio aspectRatio={8 / 14}>
+                <Card.Img src={image4}/>
+              </Ratio>
+                <Card.Body>
+                  <Card.Title>Customized</Card.Title>
+                  <Card.Text>QualiHire provides all your employee management data in one place. Sifting through large datasets is a thing of the past!</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
