@@ -26,22 +26,22 @@ const Navbar = (user) => {
                         <LinkContainer to="/home">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
-                        <NavDropdown title="">
-//                            <NavDropdown.Item href="/productsearch">
-//                                <LinkContainer to="/productsearch">
-//                                    <Nav.Link>Company Search</Nav.Link>
-//                                </LinkContainer>
-//                            </NavDropdown.Item>
-//                            <NavDropdown.Item>
-//                                <LinkContainer to="/dataprofiles">
-//                                    <Nav.Link>Data Profiles</Nav.Link>
-//                                </LinkContainer>
-//                            </NavDropdown.Item>
-//                        </NavDropdown>
+                        <NavDropdown title="Services">
+                            <NavDropdown.Item href="/productsearch">
+                                <LinkContainer to="/productsearch">
+                                    <Nav.Link>Company Search</Nav.Link>
+                                </LinkContainer>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <LinkContainer to="/dataprofiles">
+                                    <Nav.Link>Data Profiles</Nav.Link>
+                                </LinkContainer>
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
-                        <a href="http://localhost:8501/"></a>
-                        <LinkContainer to="">
+                        <a href="http://localhost:8501/">Dashboard</a>
+                        <LinkContainer to="/SignIn">
                             <Nav.Link>{SignInText}</Nav.Link>
                         </LinkContainer>
                     </Nav>

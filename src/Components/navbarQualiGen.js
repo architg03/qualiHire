@@ -26,7 +26,7 @@ const Navbar = (user) => {
                         <LinkContainer to="/home">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
-                        <NavDropdown title="Services">
+                        <NavDropdown title="">
                             <NavDropdown.Item href="/productsearch">
                                 <LinkContainer to="/productsearch">
                                     <Nav.Link>Company Search</Nav.Link>
@@ -40,8 +40,8 @@ const Navbar = (user) => {
                         </NavDropdown>
                     </Nav>
                     <Nav className="mr-auto">
-                        <a href="http://localhost:8501/">Dashboard</a>
-                        <LinkContainer to="/SignIn">
+                        <a href="http://localhost:8501/"></a>
+                        <LinkContainer to="">
                             <Nav.Link>{SignInText}</Nav.Link>
                         </LinkContainer>
                     </Nav>
