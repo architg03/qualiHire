@@ -11,6 +11,7 @@ import slide1 from "../Assets/image.jpg";
 import slide2 from "../Assets/finger tap.jpg";
 import slide3 from "../Assets/circle of code.jpg";
 import image4 from "../Assets/AI.jpg"
+import image5 from "../Assets/White_full.png"
 import { Link } from "react-router-dom";
 
 const home = () => {
@@ -19,7 +20,7 @@ const home = () => {
       <div style={{ marginTop: "50px" }}>
         <Card className="bg-dark text-white">
           <Ratio aspectRatio={12 / 36}>
-            <Card.Img src={slide1} alt="background" style={{height:800, width:2500}} />
+            <Card.Img src={slide1} alt="background" style={{height:800, width:1900}} />
           </Ratio>
           <Fade in>
             <Card.ImgOverlay style={{ marginTop: "22%", marginLeft: "47%" }}>

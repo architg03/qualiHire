@@ -50,5 +50,4 @@ const Navbar = (user) => {
         </NavB>
     );
 }
-
 export default Navbar;

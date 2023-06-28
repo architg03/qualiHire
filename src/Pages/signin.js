@@ -34,7 +34,7 @@ const SignUp = (props) => {
     event.preventDefault();
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        history("/dashboard"); // redirect to the home page after successful login
+        history("/home"); // redirect to the home page after successful login
       })
       .catch((error) => {
         setError(error.message);
